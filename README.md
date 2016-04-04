@@ -2,8 +2,12 @@
 
 Yleisiä linkkejä:
 
-* En pystynyt aloittamaan sovellustani vielä, koska cs-käyttäjätunnukseni ei ole vielä toiminnassa.
 * [Linkki dokumentaatiooni](doc/dokumentaatio.pdf)
+* [Etusivu](johetema.users.cs.helsinki.fi/muistilista/)
+* [Muistilista](johetema.users.cs.helsinki.fi/muistilista/muistilista)
+* [Askare](johetema.users.cs.helsinki.fi/muistilista/muistilista/1)
+* [Muokkaus](johetema.users.cs.helsinki.fi/muistilista/muistilista/1/muokkaus)
+* [Kirjautuminen](johetema.users.cs.helsinki.fi/muistilista/login)
 
 ## Työn aihe
 
