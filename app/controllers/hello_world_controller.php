@@ -1,5 +1,4 @@
 <?php
-
   class HelloWorldController extends BaseController{
 
     public static function index(){
@@ -8,8 +7,11 @@
     }
 
     public static function sandbox(){
-      // Testaa koodiasi täällä
-      View::Make('helloworld.html');
+      $asd = Task::find(1);
+      $kaikki = Task::all();
+
+      Kint::dump($asd);
+      Kint::dump($kaikki);
     }
     public static function muistilista(){
       View::make('suunnitelmat/muistilista.html');
