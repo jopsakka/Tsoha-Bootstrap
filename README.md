@@ -3,11 +3,11 @@
 Yleisiä linkkejä:
 
 * [Linkki dokumentaatiooni](doc/dokumentaatio.pdf)
-* [Etusivu](johetema.users.cs.helsinki.fi/muistilista/)
-* [Muistilista](johetema.users.cs.helsinki.fi/muistilista/muistilista)
-* [Askare](johetema.users.cs.helsinki.fi/muistilista/muistilista/1)
-* [Muokkaus](johetema.users.cs.helsinki.fi/muistilista/muistilista/1/muokkaus)
-* [Kirjautuminen](johetema.users.cs.helsinki.fi/muistilista/login)
+* [Etusivu](http://johetema.users.cs.helsinki.fi/muistilista/)
+* [Muistilista](http://johetema.users.cs.helsinki.fi/muistilista/task)
+* [Askare](http://johetema.users.cs.helsinki.fi/muistilista/task/1)
+* [Muokkaus](http://johetema.users.cs.helsinki.fi/muistilista/muistilista/1/muokkaus)
+* [Kirjautuminen](http://johetema.users.cs.helsinki.fi/muistilista/login)
 
 ## Työn aihe
 
