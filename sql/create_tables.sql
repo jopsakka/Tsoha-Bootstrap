@@ -4,7 +4,7 @@ CREATE TABLE Player(
 	password varchar(50) NOT NULL
 );
 
-CREATE TABLE Class(
+CREATE TABLE Category(
 	id SERIAL PRIMARY KEY,
 	name varchar(50) NOT NULL
 ); 
@@ -15,7 +15,7 @@ CREATE TABLE Task(
 	name varchar(50) NOT NULL,
 	done boolean DEFAULT FALSE,
 	description varchar(400),
-	class INTEGER REFERENCES Class(id),
+	category INTEGER REFERENCES Category(id),
 	importance INTEGER,
 	added DATE
 );

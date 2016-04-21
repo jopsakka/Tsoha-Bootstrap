@@ -1,5 +1,8 @@
 # Tietokantasovelluksen esittelysivu
 
+Käyttäjänimi: Jaska
+Salasana: Petteri
+
 Yleisiä linkkejä:
 
 * [Linkki dokumentaatiooni](doc/dokumentaatio.pdf)

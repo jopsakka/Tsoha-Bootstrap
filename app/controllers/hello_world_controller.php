@@ -7,11 +7,15 @@
     }
 
     public static function sandbox(){
-      $asd = Task::find(1);
-      $kaikki = Task::all();
+      $doom = new Task(array(
+        'name' => 'd',
+        'category' => '1',
+        'importance' => '3',
+        'description' => 'Boom, boom!'
+      ));
+      $errors = $doom->errors();
 
-      Kint::dump($asd);
-      Kint::dump($kaikki);
+      Kint::dump($errors);
     }
     public static function muistilista(){
       View::make('suunnitelmat/muistilista.html');

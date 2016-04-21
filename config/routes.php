@@ -1,27 +1,53 @@
 <?php
-
-  $routes->get('/', function() {
-    HelloWorldController::index();
+  
+  function check_logged_in() {
+    BaseController::check_logged_in();
+  }
+  $routes->post('/logout', function(){
+    UserController::logout();
   });
 
-  $routes->get('/task', function() {
+  $routes->get('/','check_logged_in', function() {
     TaskController::index();
   });
 
+  $routes->get('/task','check_logged_in', function() {
+    TaskController::index();
+  });
+
+  $routes->get('/login', function(){
+    UserController::login();
+  });
+  
+  $routes->post('/login', function(){
+    UserController::handle_login();
+  });
 
 
-  $routes->post('/task', function(){
+
+  $routes->post('/task','check_logged_in', function(){
     TaskController::store();
   });
 
-  $routes->get('/task/new', function(){
+  $routes->get('/task/new','check_logged_in', function(){
     TaskController::create();
   });
 
-  $routes->get('/task/:id', function($id){
+  $routes->get('/task/:id','check_logged_in', function($id){
     TaskController::show($id);
   });
 
+  $routes->get('/task/:id/edit','check_logged_in', function($id) {
+    TaskController::edit($id);
+  });
+
+  $routes->post('/task/:id/edit','check_logged_in', function($id){
+    TaskController::update($id);
+  });
+
+  $routes->post('/task/:id/destroy','check_logged_in', function($id){
+    TaskController::destroy($id);
+  });
 
 
 
@@ -40,9 +66,7 @@
     HelloWorldController::muokkaus();
   });
 
-  $routes->get('/login', function() {
-    HelloWorldController::login();
-  });
+
 
   $routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
