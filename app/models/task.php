@@ -51,7 +51,7 @@ class Task extends BaseModel{
 		}
 	}
   	public function save(){
-	    $query = DB::connection()->prepare('INSERT INTO Task (player_id, name, category, importance, description) VALUES (:player_id, :name, :category, :importance, :description) RETURNING id');
+	    $query = DB::connection()->prepare('INSERT INTO Task (player_id, name, category, importance, description, added) VALUES (:player_id, :name, :category, :importance, :description, NOW()) RETURNING id');
 	    $query->execute(array('player_id' => $this->player_id,'name' => $this->name, 'category' => $this->category, 'importance' => $this->importance, 'description' => $this->description));
 	    $row = $query->fetch();
 	    $this->id = $row['id'];

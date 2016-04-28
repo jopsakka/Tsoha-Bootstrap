@@ -33,6 +33,14 @@
     TaskController::create();
   });
 
+  $routes->get('/category/new','check_logged_in', function(){
+    CategoryController::create();
+  });
+
+  $routes->post('/category','check_logged_in', function(){
+    CategoryController::store();
+  });
+
   $routes->get('/task/:id','check_logged_in', function($id){
     TaskController::show($id);
   });

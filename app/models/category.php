@@ -23,4 +23,26 @@ class Category extends BaseModel {
 			return $category;
 		}
 	}
+
+	public static function all() {
+		$query = DB::connection()->prepare('SELECT * FROM Category');
+		$query->execute();
+		$rows = $query->fetchAll();	
+		$categories = array();
+
+		foreach($rows as $row) {
+			$categories[] = new Category(array(
+				'id' => $row['id'],
+				'name' => $row['name']
+			));
+		}
+
+		return $categories;	
+	}
+	public function save() {
+		$query = DB::connection()->prepare('INSERT INTO Category (name) VALUES (:name) RETURNING id');
+	    $query->execute(array('name' => $this->name));
+	    $row = $query->fetch();
+	    $this->id = $row['id'];
+	}
 }

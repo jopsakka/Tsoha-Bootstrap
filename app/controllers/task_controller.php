@@ -2,7 +2,8 @@
 	class TaskController extends BaseController {
 
 		public static function create() {
-			View::make('task/new.html');
+			$categories = Category::all();
+			View::make('task/new.html', array('categories' => $categories));
 		}
 
 		public static function store(){
@@ -22,7 +23,7 @@
     		$errors = $task->errors();
 
     		if (count($errors)==0) {
-    			$task->save();	
+    			$task->save();
     			Redirect::to('/task/' . $task->id, array('message' => 'Askare on lisätty muistilistaan!'));
     		} else {
     			View::make('task/new.html', array('errors' => $errors, 'attributes' => $attributes));
