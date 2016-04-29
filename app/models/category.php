@@ -39,13 +39,17 @@ class Category extends BaseModel {
 
 		return $categories;	
 	}
+
 	public function save() {
 		$query = DB::connection()->prepare('INSERT INTO Category (name) VALUES (:name) RETURNING id');
 	    $query->execute(array('name' => $this->name));
 	    $row = $query->fetch();
 	    $this->id = $row['id'];
 	}
-	public function getId() {
-		return $this->id;
+
+	public function destroy() {
+		$query = DB::connection()->prepare('DELETE FROM Category WHERE id = :id');
+		$query->execute(array('id' => $this->id)); 	
 	}
+
 }

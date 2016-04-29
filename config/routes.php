@@ -23,6 +23,10 @@
     UserController::handle_login();
   });
 
+  $routes->get('/category','check_logged_in', function(){
+    CategoryController::index();
+  });
+
 
 
   $routes->post('/task','check_logged_in', function(){
@@ -39,6 +43,10 @@
 
   $routes->post('/category','check_logged_in', function(){
     CategoryController::store();
+  });
+
+  $routes->post('/category/:id/destroy','check_logged_in', function($id){
+    CategoryController::destroy($id);
   });
 
   $routes->get('/task/:id','check_logged_in', function($id){
