@@ -10,9 +10,9 @@
   </p>
   <!-- Tiedot tulee listana tähän -->
   <ul>
-    <li><strong>Luokka:</strong>{{task.category}}</li>
+    <li><strong>Luokka:</strong>{{task.category.name}}</li>
     <li><strong>Tärkeysaste:</strong>{{task.importance}}</li>
-    <li><strong>Status:</strong> 
+    <li><strong>Status:</strong>
               {% if task.done %}
                 <label class="label label-success">tehty
               {% else %}

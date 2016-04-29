@@ -8,9 +8,9 @@ class Category extends BaseModel {
 		parent::__construct($attributes);
 	}
 
-	public static function find($name) {
-		$query = DB::connection()->prepare('SELECT * FROM Category WHERE name = :name LIMIT 1');
-		$query->execute(array('name' => $name));
+	public static function find($id) {
+		$query = DB::connection()->prepare('SELECT * FROM Category WHERE id = :id LIMIT 1');
+		$query->execute(array('id' => $id));
 		$row = $query->fetch();
 
 		if($row) {
@@ -44,5 +44,8 @@ class Category extends BaseModel {
 	    $query->execute(array('name' => $this->name));
 	    $row = $query->fetch();
 	    $this->id = $row['id'];
+	}
+	public function getId() {
+		return $this->id;
 	}
 }

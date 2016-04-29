@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Muokkaa askaretta</h1>
+
+  {% if errors %}
+    <div class="alert alert-danger">
+      <ul>
+        {% for error in errors %}
+          <li>{{error}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  <form method="post" action="{{base_path}}/task/{{attributes.id}}/edit">
+    <div class="form-group">
+      <label class="control-label">Nimi</label>
+      <input name="name" class="form-control" value="{{attributes.name}}"type="text">
+    </div>
+
+    <div class="form-group">
+      <label class="control-label">Luokka</label>
+      <select class="form-control" name="category">
+        {% for category in categories %}
+          <option value="{{category.id}}">{{category.name}}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label">Tärkeysaste</label>
+      <input name="importance" class="form-control" value="{{attributes.importance}}" type="text">
+    </div>
+
+    <div class="form-group">
+      <label class="control-label">Status</label><br>
+      <input type="radio" name="done" value="tehty"> Tehty<br>
+      <input type="radio" name="done" value="kesken" checked> Kesken<br>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label">Kuvaus</label>
+      <textarea name="description" class="form-control">{{attributes.description}}</textarea>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Päivitä</button>
+    </div>
+  </form>
+{% endblock %}

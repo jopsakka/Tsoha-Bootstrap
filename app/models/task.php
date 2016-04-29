@@ -22,7 +22,7 @@ class Task extends BaseModel{
 				'name' => $row['name'],
 				'done' => $row['done'],
 				'description' => $row['description'],
-				'category' => $row['category'],
+				'category' => Category::find($row['category']),
 				'importance' => $row['importance'],
 				'added' => $row['added']
 			));
@@ -42,7 +42,7 @@ class Task extends BaseModel{
 				'name' => $row['name'],
 				'done' => $row['done'],
 				'description' => $row['description'],
-				'category' => $row['category'],
+				'category' => Category::find($row['category']),
 				'importance' => $row['importance'],
 				'added' => $row['added']
 			));
@@ -51,8 +51,9 @@ class Task extends BaseModel{
 		}
 	}
   	public function save(){
-	    $query = DB::connection()->prepare('INSERT INTO Task (player_id, name, category, importance, description, added) VALUES (:player_id, :name, :category, :importance, :description, NOW()) RETURNING id');
-	    $query->execute(array('player_id' => $this->player_id,'name' => $this->name, 'category' => $this->category, 'importance' => $this->importance, 'description' => $this->description));
+  		$category_id = $this->category->id;
+	    $query = DB::connection()->prepare('INSERT INTO Task (player_id, name, category, importance, description, done, added) VALUES (:player_id, :name, :category, :importance, :description, FALSE, NOW()) RETURNING id');
+	    $query->execute(array('player_id' => $this->player_id,'name' => $this->name, 'category' => $category_id, 'importance' => $this->importance, 'description' => $this->description));
 	    $row = $query->fetch();
 	    $this->id = $row['id'];
   	}
@@ -76,10 +77,14 @@ class Task extends BaseModel{
   		return $errors;
   	}
   	public function update() {
-  		$query = DB::connection()->prepare('UPDATE Task (name, category, importance, description) VALUES (:name, :category, :importance, :description) RETURNING id');
-	    $query->execute(array('name' => $this->name, 'category' => $this->category, 'importance' => $this->importance, 'description' => $this->description));
-	    $row = $query->fetch();
-	    $this->id = $row['id'];	
+  		$query = DB::connection()->prepare('UPDATE Task SET(name, category, importance, description, done)=(:name, :category, :importance, :description, :done) WHERE id = :id');
+  		$teksti;
+  		if ($this->done == TRUE) {
+  			$teksti = 'TRUE';
+  		} else {
+  			$teksti = 'FALSE';
+  		}
+	    $query->execute(array('name' => $this->name, 'category' => $this->category, 'importance' => $this->importance, 'description' => $this->description, 'id' => $this->id, 'done' => $teksti));
   	}
   	public function destroy() {
    		$query = DB::connection()->prepare('DELETE FROM Task WHERE id = :id');

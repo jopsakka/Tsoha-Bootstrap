@@ -15,7 +15,7 @@
     			'player_id' => $user_id,
       			'name' => $params['name'],
       			'description' => $params['description'],
-      			'category' => $params['category'],
+      			'category' => $category,
       			'importance' => $params['importance']
     		);
 
@@ -47,19 +47,27 @@
 
 		public static function edit($id) {
 			$task = Task::find($id);
-			View::make('task/edit.html', array('attributes' => $task));
+			$categories = Category::all();
+			View::make('task/edit.html', array('attributes' => $task, 'categories' => $categories));
 		}
 
 		public static function update($id) {
 			$params = $_POST;
-
+			$str1 = $params['done'];
+			$str2 = 'tehty';
+			if (strcmp($str1, $str2) == 0) {
+				$done = TRUE;
+			} else {
+				$done = FALSE;
+			}
 			$attributes = array(
 				'id' => $id,
 				'name' => $params['name'],
-				'done' => $params['done'],
 				'category' => $params['category'],
 				'importance' => $params['importance'],
-				'description' => $params['description']
+				'description' => $params['description'],
+				'done' => $done
+
 			);
 
 			$task = new Task($attributes);
