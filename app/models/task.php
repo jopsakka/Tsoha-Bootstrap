@@ -10,7 +10,7 @@ class Task extends BaseModel{
 	} 	
 
 	public static function all($player_id) {
-		$query = DB::connection()->prepare('SELECT * FROM Task WHERE player_id = :player_id');
+		$query = DB::connection()->prepare('SELECT * FROM Task WHERE player_id = :player_id ORDER BY done, importance DESC');
 		$query->execute(array('player_id' => $player_id));
 		$rows = $query->fetchAll();
 		$tasks = array();
