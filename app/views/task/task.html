@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
   <h1>{{task.name}}</h1>
+  
+  {% if message %}
+    <div class="alert alert-success">
+      {{message}}
+    </div>
+  {% endif %}
   <!-- Painikkeet tähän -->
   <p>
     <form method="post" action="{{base_path}}/task/{{task.id}}/destroy" style="display: inline block;">

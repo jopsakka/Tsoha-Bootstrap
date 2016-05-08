@@ -74,7 +74,8 @@
 			$errors = $task->errors();
 
 			if(count($errors) > 0) {
-				View::make('task/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+				$categories = Category::all();
+				View::make('task/edit.html', array('errors' => $errors, 'attributes' => $attributes, 'categories' => $categories));
 			} else {
 				$task->update();
 				Redirect::to('/task/' . $task->id, array('message' => 'Askaretta muokattu onnistuneesti'));

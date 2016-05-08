@@ -6,7 +6,7 @@ class Task extends BaseModel{
 
 	public function __construct($attributes){
 		parent::__construct($attributes);
-		$this->validators = array('validate_name', 'validate_importance');
+		$this->validators = array('validate_name', 'validate_importance', 'validate_description');
 	} 	
 
 	public static function all($player_id) {
@@ -58,24 +58,7 @@ class Task extends BaseModel{
 	    $this->id = $row['id'];
   	}
 
-  	public function validate_name() {
-  		$errors = array();
-  		if($this->name == '' || $this->name == null){
-    		$errors[] = 'Nimi ei saa olla tyhjä!';
-  		}
-  		if(strlen($this->name) < 3){
-    		$errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
-  		}
 
-  		return $errors;
-  	}
-  	public function validate_importance() {
-  		$errors = array();
-  		if (!is_numeric($this->importance)) {
-  			$errors[] = 'Tärkeysasteen pitää olla numero!';
-  		}
-  		return $errors;
-  	}
   	public function update() {
   		$query = DB::connection()->prepare('UPDATE Task SET(name, category, importance, description, done)=(:name, :category, :importance, :description, :done) WHERE id = :id');
   		$teksti;
@@ -89,5 +72,36 @@ class Task extends BaseModel{
   	public function destroy() {
    		$query = DB::connection()->prepare('DELETE FROM Task WHERE id = :id');
 		$query->execute(array('id' => $this->id)); 		
+  	}
+
+  	public function validate_name() {
+  		$errors = array();
+  		if($this->name == '' || $this->name == null){
+    		$errors[] = 'Nimi ei saa olla tyhjä!';
+  		}
+  		if(strlen($this->name) < 3){
+    		$errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
+  		}
+  		if(strlen($this->name) > 50) {
+  			$errors[] = 'Nimi ei voi olla yli 50 merkkiä!';
+  		}
+
+  		return $errors;
+  	}
+
+  	public function validate_importance() {
+  		$errors = array();
+  		if (!is_numeric($this->importance)) {
+  			$errors[] = 'Tärkeysasteen pitää olla numero!';
+  		}
+  		return $errors;
+  	}
+
+  	public function validate_description() {
+  		$errors = array();
+  		if(strlen($this->description) > 400) {
+  			$errors[] = 'Kuvaus ei voi olla yli 400 merkkiä pitkä!';
+  		}
+  		return $errors;
   	}
 }

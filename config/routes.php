@@ -48,6 +48,13 @@
   $routes->post('/category/:id/destroy','check_logged_in', function($id){
     CategoryController::destroy($id);
   });
+    $routes->get('/category/:id/edit','check_logged_in', function($id) {
+    CategoryController::edit($id);
+  });
+
+  $routes->post('/category/:id/edit','check_logged_in', function($id){
+    CategoryController::update($id);
+  });
 
   $routes->get('/task/:id','check_logged_in', function($id){
     TaskController::show($id);
